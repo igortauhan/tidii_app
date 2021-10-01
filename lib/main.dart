@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tidii/pages/district_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,11 +34,36 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Optimus Gas'),
+        backgroundColor: Colors.grey.shade700,
       ),
+      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: Container(
-
+          margin: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Center(
+                child: Text(
+                  'Detalhes da cidade',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                  ),
+                ),
+              ),
+              const DistrictPage(),
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 20.0),
+                child: const Text(
+                  'Sua segurança é tudo',
+                  style: TextStyle(fontSize: 15.0),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

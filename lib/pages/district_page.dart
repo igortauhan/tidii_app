@@ -57,6 +57,8 @@ class _DistrictPageState extends State<DistrictPage> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: itemsData.length,
           itemBuilder: (context, index) => Column(
                 children: [
                   const SizedBox(
