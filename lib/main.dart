@@ -32,10 +32,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Optimus Gas'),
+        title: const Text('Optimus Gas'),
       ),
-      body: Center(
+      body: SafeArea(
+        child: Container(
 
+        ),
       ),
     );
   }
