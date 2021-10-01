@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tidii/mock_data/district_mock_data.dart';
+import 'package:tidii/pages/street_page.dart';
 
 class DistrictPage extends StatefulWidget {
   const DistrictPage({Key? key}) : super(key: key);
@@ -30,7 +31,9 @@ class _DistrictPageState extends State<DistrictPage> {
           width: 300,
           height: 120,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => StreetPage(isLeaking: item['isLeaking'],)));
+            },
             child: Text(
               item['district'] + "\n\n" + item['info'],
               style: const TextStyle(fontSize: 16.0),
