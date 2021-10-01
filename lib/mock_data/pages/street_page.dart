@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tidii/mock_data/district_mock_data.dart';
+import 'package:tidii/mock_data/street_safe_mock_data.dart';
+import 'package:tidii/mock_data/street_leaking_mock_data.dart';
 
-class DistrictPage extends StatefulWidget {
-  const DistrictPage({Key? key}) : super(key: key);
+class StreetPage extends StatefulWidget {
+  bool isLeaking;
+
+  StreetPage({Key? key, required this.isLeaking}) : super(key: key);
 
   @override
-  _DistrictPageState createState() => _DistrictPageState();
+  _StreetPageState createState() => _StreetPageState();
 }
 
-class _DistrictPageState extends State<DistrictPage> {
+class _StreetPageState extends State<StreetPage> {
   List<Widget> itemsData = [];
 
   // get a color to ElevatedButton background
@@ -21,9 +24,16 @@ class _DistrictPageState extends State<DistrictPage> {
   }
 
   void getPostsData() {
-    List<dynamic> responseList = districtMockData;
+    List<dynamic> responseData;
+    if (widget.isLeaking) {
+      responseData = streetLeakingMockData;
+    } else {
+      responseData = streetSafeMockData;
+    }
+
     List<Widget> listItems = [];
-    for (var item in responseList) {
+
+    for (var item in responseData) {
       Color color = getSituationColor(item['isLeaking']);
       listItems.add(
         SizedBox(
@@ -32,7 +42,7 @@ class _DistrictPageState extends State<DistrictPage> {
           child: ElevatedButton(
             onPressed: () {},
             child: Text(
-              item['district'] + "\n\n" + item['info'],
+              item['street'] + "\n\n" + item['info'],
               style: const TextStyle(fontSize: 16.0),
             ),
             style: ElevatedButton.styleFrom(
@@ -55,19 +65,6 @@ class _DistrictPageState extends State<DistrictPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-          itemBuilder: (context, index) => Column(
-                children: [
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  itemsData[index],
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                ],
-              )),
-    );
+    return Container();
   }
 }
