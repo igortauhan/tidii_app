@@ -1,31 +1,31 @@
 const districtMockData = [
   {
-    "street": "Bairro 1",
+    "district": "Bairro 1",
     "info": "Atividade normal",
     "isLeaking": false,
   },
   {
-    "street": "Bairro 2",
+    "district": "Bairro 2",
     "info": "Vazamento detectado",
     "isLeaking": true,
   },
   {
-    "street": "Bairro 3",
+    "district": "Bairro 3",
     "info": "Atividade normal",
     "isLeaking": false,
   },
   {
-    "street": "Bairro 4",
+    "district": "Bairro 4",
     "info": "Atividade normal",
     "isLeaking": false,
   },
   {
-    "street": "Bairro 5",
+    "district": "Bairro 5",
     "info": "Atividade normal",
     "isLeaking": false,
   },
   {
-    "street": "Bairro 6",
+    "district": "Bairro 6",
     "info": "Vazamento detectado",
     "isLeaking": true,
   },
