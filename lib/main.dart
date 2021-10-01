@@ -37,6 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: const Text('Optimus Gas'),
         backgroundColor: Colors.grey.shade700,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Image.asset('lib/assets/images/app_icon.png'),
+        ),
       ),
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
