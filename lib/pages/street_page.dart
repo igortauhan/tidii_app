@@ -41,7 +41,11 @@ class _StreetPageState extends State<StreetPage> {
           width: 300,
           height: 120,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (item['isLeaking']) {
+                showAlertDialog(context);
+              }
+            },
             child: Text(
               item['street'] + "\n\n" + item['info'],
               style: const TextStyle(fontSize: 16.0),
@@ -115,4 +119,26 @@ class _StreetPageState extends State<StreetPage> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Widget okButton = TextButton(
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      child: Text('Voltar'));
+
+  AlertDialog alert = AlertDialog(
+    title: Text('Atenção'),
+    content: Text('Hora do vazamento\n20:00:00'),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      });
 }
