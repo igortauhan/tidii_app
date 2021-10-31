@@ -5,15 +5,18 @@ import 'package:tidii/models/street.dart';
 import 'package:tidii/services/street_service.dart';
 
 class StreetPage extends StatefulWidget {
-  int districtId;
+  final int districtId;
+  final String districtName;
 
-  StreetPage({Key? key, required this.districtId}) : super(key: key);
+  const StreetPage({Key? key, required this.districtId, required this.districtName}) : super(key: key);
 
   @override
   _StreetPageState createState() => _StreetPageState();
 }
 
 class _StreetPageState extends State<StreetPage> {
+  late final String districtName;
+
   late Future<List<Street>> futureStreets;
 
   List<Widget> itemsData = [];
@@ -63,6 +66,7 @@ class _StreetPageState extends State<StreetPage> {
   @override
   void initState() {
     super.initState();
+    districtName = widget.districtName;
     futureStreets = StreetService().fetchDistrict(widget.districtId);
     getPostsData();
   }
@@ -82,10 +86,10 @@ class _StreetPageState extends State<StreetPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Center(
+              Center(
                 child: Text(
-                  'Detalhes dos bairro',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+                  'Detalhe do bairro ' + districtName,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 ),
               ),
               Expanded(

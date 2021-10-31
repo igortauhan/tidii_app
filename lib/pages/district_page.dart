@@ -43,6 +43,7 @@ class _DistrictPageState extends State<DistrictPage> {
                   MaterialPageRoute(
                       builder: (context) => StreetPage(
                             districtId: item.id,
+                            districtName: item.name,
                           )));
             },
             child: Text(
