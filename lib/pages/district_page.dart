@@ -42,7 +42,7 @@ class _DistrictPageState extends State<DistrictPage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => StreetPage(
-                            isLeaking: item.leakingSituation,
+                            districtId: item.id,
                           )));
             },
             child: Text(

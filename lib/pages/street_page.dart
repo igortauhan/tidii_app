@@ -1,18 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tidii/mock_data/street_safe_mock_data.dart';
-import 'package:tidii/mock_data/street_leaking_mock_data.dart';
+
+import 'package:tidii/models/street.dart';
+import 'package:tidii/services/street_service.dart';
 
 class StreetPage extends StatefulWidget {
-  bool isLeaking;
+  int districtId;
 
-  StreetPage({Key? key, required this.isLeaking}) : super(key: key);
+  StreetPage({Key? key, required this.districtId}) : super(key: key);
 
   @override
   _StreetPageState createState() => _StreetPageState();
 }
 
 class _StreetPageState extends State<StreetPage> {
+  late Future<List<Street>> futureStreets;
+
   List<Widget> itemsData = [];
 
   // get a color to ElevatedButton background
@@ -24,30 +27,25 @@ class _StreetPageState extends State<StreetPage> {
     return Colors.green;
   }
 
-  void getPostsData() {
-    List<dynamic> responseData;
-    if (widget.isLeaking) {
-      responseData = streetLeakingMockData;
-    } else {
-      responseData = streetSafeMockData;
-    }
+  void getPostsData() async {
+    List<Street> streets = await futureStreets;
 
     List<Widget> listItems = [];
 
-    for (var item in responseData) {
-      Color color = getSituationColor(item['isLeaking']);
+    for (var item in streets) {
+      Color color = getSituationColor(item.leakingSituation);
       listItems.add(
         SizedBox(
           width: 300,
           height: 120,
           child: ElevatedButton(
             onPressed: () {
-              if (item['isLeaking']) {
+              if (item.leakingSituation) {
                 showAlertDialog(context);
               }
             },
             child: Text(
-              item['street'] + "\n\n" + item['info'],
+              item.name + "\n\n" + item.info,
               style: const TextStyle(fontSize: 16.0),
             ),
             style: ElevatedButton.styleFrom(
@@ -65,6 +63,7 @@ class _StreetPageState extends State<StreetPage> {
   @override
   void initState() {
     super.initState();
+    futureStreets = StreetService().fetchDistrict(widget.districtId);
     getPostsData();
   }
 
