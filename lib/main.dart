@@ -42,6 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {},
           icon: Image.asset('lib/assets/images/fire.png'),
         ),
+        actions: <Widget>[
+          TextButton(
+              onPressed: () {
+                showHelp(context);
+              },
+              child: Text('Ajuda')
+          )
+        ],
       ),
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
@@ -73,4 +81,33 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+showHelp(BuildContext context) {
+  Widget okButton = TextButton(
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      child: Text('Voltar'));
+
+  AlertDialog alert = AlertDialog(
+    title: Text('Ajuda'),
+    content: Text(
+          'A tela inicial do app mostra todos os bairros que tem monitoramento disponível.'
+          ' Caso o fundo do bairro estiver na cor vermelha, há um vazamento em alguma das'
+          ' suas ruas!\n\n'
+          'Ao clicar no card do bairro, suas respectivas ruas irão aparecer seguindo o mesmo'
+          ' esquema de cores. Caso uma rua esteja com vazamento, o seu fundo ficará vermelho e'
+          ' você poderá clicar para saber o horário do seu vazamento.'
+    ),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      });
 }
