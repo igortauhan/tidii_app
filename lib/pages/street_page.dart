@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:tidii/models/street.dart';
 import 'package:tidii/services/street_service.dart';
 
@@ -16,7 +18,6 @@ class StreetPage extends StatefulWidget {
 
 class _StreetPageState extends State<StreetPage> {
   late final String districtName;
-
   late Future<List<Street>> futureStreets;
 
   List<Widget> itemsData = [];
@@ -44,7 +45,7 @@ class _StreetPageState extends State<StreetPage> {
           child: ElevatedButton(
             onPressed: () {
               if (item.leakingSituation) {
-                showAlertDialog(context);
+                showLeakingDate(context, item.leakingDate);
               }
             },
             child: Text(
@@ -124,7 +125,20 @@ class _StreetPageState extends State<StreetPage> {
   }
 }
 
-showAlertDialog(BuildContext context) {
+showLeakingDate(BuildContext context, DateTime leakingDate) {
+  var inputFormat = DateFormat('yyyy-MM-dd HH:mm');
+  var inputDate = inputFormat.parse(leakingDate.toString());
+  var formattedDate = DateTime(
+      inputDate.year,
+      inputDate.month,
+      inputDate.day,
+      inputDate.hour - 3,
+      inputDate.minute
+      );
+
+  var outputFormat = DateFormat('dd/MM/yyyy HH:mm');
+  var outputDate = outputFormat.format(formattedDate);
+
   Widget okButton = TextButton(
       onPressed: () {
         Navigator.of(context).pop();
@@ -133,7 +147,7 @@ showAlertDialog(BuildContext context) {
 
   AlertDialog alert = AlertDialog(
     title: Text('Atenção'),
-    content: Text('Hora do vazamento\n20:00:00'),
+    content: Text('Hora do vazamento\n$outputDate'),
     actions: [
       okButton,
     ],
