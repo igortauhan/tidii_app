@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.grey.shade700,
         leading: IconButton(
           onPressed: () {},
-          icon: Image.asset('lib/assets/images/app_icon.png'),
+          icon: Image.asset('lib/assets/images/fire.png'),
         ),
       ),
       backgroundColor: Colors.grey.shade300,
